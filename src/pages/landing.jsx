@@ -3,10 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight } from "lucide-react";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
   const [url, setUrl] = useState();
+  const navigate = useNavigate();
+  const handleUrl = (e) => {
+    e.preventDefault();
+    if (url) navigate(`/auth?createNew=${url}`);
+  };
   return (
     <div>
       <section className="mt-20 pb-12 space-y-10 md:space-y-20 px-5">
@@ -31,7 +36,10 @@ const LandingPage = () => {
             </span>
           </p>
 
-          <form className="flex flex-col sm:flex-row gap-2 items-center justify-center sm-14 w-full md:w-[60%] mx-auto mt-10">
+          <form
+            onSubmit={handleUrl}
+            className="flex flex-col sm:flex-row gap-2 items-center justify-center sm-14 w-full md:w-[60%] mx-auto mt-10"
+          >
             <Input
               type="url"
               value={url}
@@ -44,7 +52,7 @@ const LandingPage = () => {
               className="bg-blue-500 hover:bg-blue-600"
               type="submit"
             >
-              <Link href="/">Generate Dynamic QR</Link>
+              Generate Dynamic QR
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </form>
