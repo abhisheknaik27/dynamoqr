@@ -17,6 +17,7 @@ import { getUrls } from "@/db/apiUrls";
 import { UrlState } from "@/context";
 import { getClicksForUrls } from "@/db/apiClicks";
 import LinkCard from "@/components/link-card";
+import CreateLink from "@/components/create-link";
 
 const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -74,7 +75,7 @@ const Dashboard = () => {
 
       <div className="flex justify-between px-1 mt-10">
         <h1 className="text-4xl gradient-title">My Links</h1>
-        <Button>Create Link</Button>
+        <CreateLink />
       </div>
 
       <div className="relative mt-4">
@@ -88,7 +89,7 @@ const Dashboard = () => {
       </div>
       {error && <Error message={error?.message} />}
       {(filteredUrls || []).map((url, id) => {
-        return <LinkCard key={id} url={url} fetchUrl={fnUrls} />
+        return <LinkCard key={id} url={url} fetchUrl={fnUrls} />;
       })}
     </div>
   );
