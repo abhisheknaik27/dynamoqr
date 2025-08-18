@@ -14,7 +14,7 @@ const AppLayout = () => {
         <span className="font-bold ">dynamoQR</span> by Abhishek Naik
       </footer>
     </div>
-  );
+  )
 };
 
 export default AppLayout;

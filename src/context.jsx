@@ -14,7 +14,7 @@ const UrlProvider = ({ children }) => {
   }, []);
 
   return (
-    <UrlContext.Provider value={(user, fetchUser, loading, isAuthenticated)}>
+    <UrlContext.Provider value={{ user, fetchUser, loading, isAuthenticated }}>
       {children}
     </UrlContext.Provider>
   );
