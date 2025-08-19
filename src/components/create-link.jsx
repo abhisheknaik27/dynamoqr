@@ -29,7 +29,6 @@ const CreateLink = () => {
   const [formValues, setFormValues] = useState({
     title: "",
     dynamic_url: longLink ? longLink : "",
-    static_url: "",
   });
 
   const schema = yup.object().shape({
@@ -38,7 +37,6 @@ const CreateLink = () => {
       .string()
       .url("URL must be valid")
       .required("URL is required"),
-    static_url: yup.string(),
   });
 
   const handleChange = (e) => {
@@ -107,7 +105,7 @@ const CreateLink = () => {
         {errors && <Error message={errors.title} />}
 
         <Input
-          id="url"
+          id="dynamic_url"
           type="text"
           placeholder="Enter Your Link"
           value={formValues.dynamic_url}

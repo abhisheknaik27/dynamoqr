@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 const AppLayout = () => {
   return (
     <div className="flex flex-col h-screen">
-      <main className="flex-grow px-6">
+      <main className="flex-grow">
         <Header />
         <Outlet />
       </main>
@@ -14,7 +14,7 @@ const AppLayout = () => {
         <span className="font-bold ">dynamoQR</span> by Abhishek Naik
       </footer>
     </div>
-  )
+  );
 };
 
 export default AppLayout;
