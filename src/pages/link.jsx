@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { UrlState } from "@/context";
-import { getClicksForUrls } from "@/db/apiClicks";
-import { deleteUrl, getUrl } from "@/db/apiUrls";
+import { deleteUrl, getUrl, updateUrl } from "@/db/apiUrls";
 import useFetch from "@/hooks/use-fetch";
-import { Copy, Download, LinkIcon, Trash } from "lucide-react";
-import React, { useEffect } from "react";
+import { Copy, Download, LinkIcon, Pen, Trash } from "lucide-react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BarLoader, BeatLoader } from "react-spinners";
 
@@ -19,11 +18,25 @@ import {
 } from "@/components/ui/card";
 import Location from "@/components/location-stats";
 import DeviceStats from "@/components/device-stats";
+import { getClicksforUrl } from "@/db/apiClicks";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 
 const Link = () => {
   const { id } = useParams();
   const { user } = UrlState();
   const navigate = useNavigate();
+  const [showDialog, setShowDialog] = useState(false);
+  const [newUrl, setNewUrl] = useState("");
+  const [isUpdating, setIsUpdating] = useState(false);
+
   const {
     loading,
     data: url,
@@ -47,7 +60,7 @@ const Link = () => {
     loading: loadingStats,
     data: stats,
     fn: fnStats,
-  } = useFetch(getClicksForUrls, id);
+  } = useFetch(getClicksforUrl, id);
 
   const { loading: loadingDelete, fn: fnDelete } = useFetch(deleteUrl, id);
 
@@ -60,6 +73,37 @@ const Link = () => {
     navigate("/dashboard");
   }
   console.log(url);
+
+  const handleUpdate = async () => {
+    // This log is the most important debugging tool we have right now
+    console.log("Attempting update with:", {
+      urlId: id,
+      userId: user?.id,
+      newUrlValue: newUrl,
+    });
+
+    if (!user || !user.id) {
+      console.error("Update aborted: User or User ID is not available.");
+      // Optionally, show a toast notification to the user here
+      return;
+    }
+
+    setIsUpdating(true);
+    try {
+      await updateUrl({
+        id: id,
+        user_id: user.id,
+        dynamic_url: newUrl,
+      });
+
+      fn();
+      setShowDialog(false);
+    } catch (e) {
+      console.error("Failed to update URL:", e);
+    } finally {
+      setIsUpdating(false);
+    }
+  };
   return (
     <>
       {(loading || loadingStats) && (
@@ -77,14 +121,58 @@ const Link = () => {
           >
             https://dynamoqr.in/{url?.static_url}
           </a>
-          <a
-            className="flex items-center gap-1 hover:underline cursor-pointer font-bold "
-            href={url?.dynamic_url}
-            target="_blank"
-          >
-            <LinkIcon />
-            {url?.dynamic_url}
-          </a>
+          <div className="flex items-center gap-2 w-full">
+            <a
+              className="flex items-center gap-1 hover:underline cursor-pointer font-bold "
+              href={url?.dynamic_url}
+              target="_blank"
+            >
+              <LinkIcon />
+              {url?.dynamic_url}
+            </a>
+
+            <Dialog
+              open={showDialog}
+              onOpenChange={(isOpen) => {
+                setShowDialog(isOpen);
+                // When the dialog opens, pre-fill the input with the current URL
+                if (isOpen) {
+                  setNewUrl(url?.dynamic_url);
+                }
+              }}
+            >
+              <DialogTrigger asChild>
+                <Button variant="ghost">
+                  <Pen size={18} />
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogHeader>
+                  <DialogTitle>Edit Dynamic URL</DialogTitle>
+                </DialogHeader>
+                <Input
+                  id="newUrl"
+                  value={newUrl}
+                  onChange={(e) => setNewUrl(e.target.value)}
+                  placeholder="https://your-new-destination.com"
+                />
+                <DialogFooter>
+                  <Button
+                    type="submit"
+                    onClick={handleUpdate}
+                    disabled={isUpdating || !user}
+                  >
+                    {isUpdating ? (
+                      <BeatLoader size={8} color="white" />
+                    ) : (
+                      "Save Changes"
+                    )}
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </div>
+
           <span className="flex items-end font-extralight text-sm">
             {new Date(url?.created_at).toLocaleString()}
           </span>
