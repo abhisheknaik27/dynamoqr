@@ -36,3 +36,16 @@ export const storeClicks = async ({ id, dynamic_url }) => {
     console.error("Error recording click:", error);
   }
 };
+
+export async function getClicksforUrl(url_id) {
+  const { data, error } = await supabase
+    .from("clicks")
+    .select("*")
+    .eq("url_id", url_id);
+
+  if (error) {
+    console.error(error.message);
+    throw new Error("Unable to load stats");
+  }
+  return data;
+}
