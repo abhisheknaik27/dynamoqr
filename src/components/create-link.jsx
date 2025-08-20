@@ -12,7 +12,7 @@ import {
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import Error from "./error";
-import * as yup from "Yup";
+import * as yup from "yup";
 import { QRCode } from "react-qrcode-logo";
 import useFetch from "@/hooks/use-fetch";
 import { createUrl } from "@/db/apiUrls";

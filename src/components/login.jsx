@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import * as Yup from "Yup";
+import * as Yup from "yup";
 
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
