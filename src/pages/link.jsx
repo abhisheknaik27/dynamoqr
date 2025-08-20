@@ -75,7 +75,6 @@ const Link = () => {
   console.log(url);
 
   const handleUpdate = async () => {
-    // This log is the most important debugging tool we have right now
     console.log("Attempting update with:", {
       urlId: id,
       userId: user?.id,
@@ -84,7 +83,6 @@ const Link = () => {
 
     if (!user || !user.id) {
       console.error("Update aborted: User or User ID is not available.");
-      // Optionally, show a toast notification to the user here
       return;
     }
 
@@ -107,7 +105,7 @@ const Link = () => {
   return (
     <>
       {(loading || loadingStats) && (
-        <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />
+        <BarLoader className="mb-4" width={"100%"} color="#2e5bf0" />
       )}
       <div className="flex flex-col gap-8 sm:flex-row justify-between m-4">
         <div className="flex flex-col items-start gap-8 rounded-lg sm:w-2/5">
@@ -115,27 +113,31 @@ const Link = () => {
             {url?.title}
           </span>
           <a
-            className="text-3xl sm:text-4xl text-blue-400 font-bold hover:underline"
+            className="text-3xl sm:text-4xl gradient-title font-bold hover:underline break-all whitespace-normal"
             href={`https://dynamoqr.in/${url?.static_url}`}
             target="_blank"
           >
             https://dynamoqr.in/{url?.static_url}
           </a>
           <div className="flex items-center gap-2 w-full">
-            <a
-              className="flex items-center gap-1 hover:underline cursor-pointer font-bold "
-              href={url?.dynamic_url}
-              target="_blank"
-            >
-              <LinkIcon />
-              {url?.dynamic_url}
-            </a>
+            <div>
+              <a
+                className=" items-center gap-1 hover:underline cursor-pointer font-bold break-all whitespace-normal"
+                href={url?.dynamic_url}
+                target="_blank"
+              >
+                {url?.dynamic_url}
+                {"  "}
+              </a>
+              <span className="text-muted-foreground font-light ">
+                (dynamic link)
+              </span>
+            </div>
 
             <Dialog
               open={showDialog}
               onOpenChange={(isOpen) => {
                 setShowDialog(isOpen);
-                // When the dialog opens, pre-fill the input with the current URL
                 if (isOpen) {
                   setNewUrl(url?.dynamic_url);
                 }

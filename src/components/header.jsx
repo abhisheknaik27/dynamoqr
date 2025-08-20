@@ -25,9 +25,14 @@ const Header = () => {
 
   return (
     <>
-      <nav className="py-4 flex justify-between items-center">
+      <nav className="py-4 px-4 flex justify-between items-center">
         <Link to="/">
-          <img src="/vite.svg" className="h-16" alt="dynamoQR" />
+          <h1
+            style={{ fontFamily: "Ubuntu, sans-serif" }}
+            className="font-bold text-2xl gradient-title"
+          >
+            dynamoQR
+          </h1>
         </Link>
 
         <div>
@@ -51,7 +56,7 @@ const Header = () => {
                   {user?.user_metadata?.name}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
+                <DropdownMenuItem asChild>
                   <Link to="/dashboard" className="flex">
                     <LinkIcon className="mr-2 h-4 w-4" />
                     My Link
@@ -75,7 +80,7 @@ const Header = () => {
           )}
         </div>
       </nav>
-      {loading && <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />}
+      {loading && <BarLoader className="mb-4" width={"100%"} color="#2e5bf0" />}
     </>
   );
 };

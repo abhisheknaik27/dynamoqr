@@ -18,6 +18,8 @@ import useFetch from "@/hooks/use-fetch";
 import { createUrl } from "@/db/apiUrls";
 import { BeatLoader } from "react-spinners";
 
+const randomSlug = () => Math.random().toString(36).slice(2, 10);
+
 const CreateLink = () => {
   const { user } = UrlState();
   const navigate = useNavigate();
@@ -31,13 +33,22 @@ const CreateLink = () => {
     dynamic_url: longLink || "",
   });
 
-  // State to hold the generated short, static URL
-  const [shortUrl, setShortUrl] = useState("");
+  const [open, setOpen] = useState(!!longLink);
+  useEffect(() => {
+    if (longLink) {
+      setFormValues((prev) => ({ ...prev, dynamic_url: longLink }));
+      setOpen(true);
+    }
+  }, [longLink]);
 
-  // This function now also generates a new short URL every time the dialog is opened
+  useEffect(() => {
+    if (open) setShortUrl(randomSlug());
+  }, [open]);
+
+  const [shortUrl, setShortUrl] = useState("");
   const handleOpenChange = (isOpen) => {
+    setOpen(isOpen);
     if (isOpen) {
-      // Generate a random 8-character string for the static URL
       setShortUrl(Math.random().toString(36).substring(2, 10));
     } else {
       setSearchParams({});
@@ -59,7 +70,6 @@ const CreateLink = () => {
     });
   };
 
-  // Pass the generated shortUrl to the useFetch hook payload
   const {
     loading,
     error,
@@ -84,7 +94,6 @@ const CreateLink = () => {
       const canvas = ref.current.canvasRef.current;
       const blob = await new Promise((resolve) => canvas.toBlob(resolve));
 
-      // The useFetch hook already has the correct payload, just trigger it
       await fnCreateUrl(blob);
     } catch (e) {
       const newErrors = {};
@@ -95,12 +104,10 @@ const CreateLink = () => {
     }
   };
 
-  // The URL that will be encoded into the QR code image
-  // It points back to your application
   const staticQrUrl = `${window.location.origin}/${shortUrl}`;
 
   return (
-    <Dialog defaultOpen={!!longLink} onOpenChange={handleOpenChange}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <Button variant="outline">Create New Link</Button>
       </DialogTrigger>
@@ -111,7 +118,6 @@ const CreateLink = () => {
           </DialogTitle>
         </DialogHeader>
 
-        {/* The QR Code now encodes the static URL */}
         {shortUrl && (
           <div className="flex flex-col items-center gap-4 p-4 border rounded-lg bg-gray-50">
             <QRCode value={staticQrUrl} size={200} ref={ref} />

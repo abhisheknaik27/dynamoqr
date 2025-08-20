@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
-  const [url, setUrl] = useState();
+  const [url, setUrl] = useState("");
   const navigate = useNavigate();
   const handleUrl = (e) => {
     e.preventDefault();
@@ -43,7 +43,7 @@ const LandingPage = () => {
             <Input
               type="url"
               value={url}
-              placeholder="Enter your URL"
+              placeholder="Enter your URL (http://www.example.com)"
               className="border-2 h-10 shadow-inner"
               onChange={(e) => setUrl(e.target.value)}
             />

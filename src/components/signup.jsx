@@ -130,7 +130,7 @@ const SignUp = () => {
         <CardFooter>
           <Button onClick={handleSignup}>
             {loading ? (
-              <BeatLoader size={10} color="#36d7b7" />
+              <BeatLoader size={10} color="#2e5bf0" />
             ) : (
               "Create Account"
             )}
