@@ -130,7 +130,7 @@ const CreateLink = () => {
               {staticQrUrl}
             </a>
             <p className="text-sm text-center text-gray-600">
-              This QR code is permanent. You can change the destination URL it
+              This QR code is permanent. You can change URL it
               points to at any time.
             </p>
           </div>
@@ -139,7 +139,7 @@ const CreateLink = () => {
         <Input
           id="title"
           type="text"
-          placeholder="Short Link Title"
+          placeholder="Title"
           value={formValues.title}
           onChange={handleChange}
         />
@@ -148,7 +148,7 @@ const CreateLink = () => {
         <Input
           id="dynamic_url"
           type="url"
-          placeholder="Enter Destination URL"
+          placeholder="Enter URL (https://www.example.com)"
           value={formValues.dynamic_url}
           onChange={handleChange}
         />
