@@ -114,10 +114,10 @@ const Link = () => {
           </span>
           <a
             className="text-3xl sm:text-4xl gradient-title font-bold hover:underline break-all whitespace-normal"
-            href={`https://dynamoqr.in/${url?.static_url}`}
+            href={`https://dynamoqr.vercel.app/${url?.static_url}`}
             target="_blank"
           >
-            https://dynamoqr.in/{url?.static_url}
+            https://dynamoqr.vercel.app/{url?.static_url}
           </a>
           <div className="flex items-center gap-2 w-full">
             <div>
@@ -183,7 +183,7 @@ const Link = () => {
               variant="ghost"
               onClick={() => {
                 navigator.clipboard.writeText(
-                  `https://dynamoqr.in/${url?.static_url}`
+                  `https://dynamoqr.vercel.app/${url?.static_url}`
                 );
               }}
             >
