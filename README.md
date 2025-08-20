@@ -1,12 +1,23 @@
-# React + Vite
+# DynamoQR ⚡
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A powerful and customizable **dynamic QR code generator** with real-time analytics and link management. Unlike static QR codes, DynamoQR lets you update the destination URL anytime without changing the printed code — perfect for businesses, events, and marketing campaigns.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 🔗 **Dynamic QR Codes** – Update your QR destinations anytime
+- 📊 **Analytics Dashboard** – Track scans by location and device type
+- 🔑 **Secure Authentication** – User login and personalized QR management
+- ⚡ **REST API** – Generate and manage QR codes programmatically
+- 📱 **Responsive UI** – Built with React and Tailwind
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React, TailwindCSS
+- **Database:** PostgreSQL (via Supabase)
+- **Auth:** Supabase Auth
+
+---
