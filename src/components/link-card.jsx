@@ -28,15 +28,15 @@ const LinkCard = ({ url, fetchUrls }) => {
         src={url?.qr}
         alt="qr code"
       />
-      <Link to={`/link/${url.id}`} className="flex flex-col flex-1">
-        <span className="text-3xl font-bold hover:underline cursor-pointer">
+      <Link to={`/link/${url.id}`} className="flex flex-col flex-1 min-w-0">
+        <span className="text-3xl font-bold hover:underline cursor-pointer break-words">
           {url?.title}
         </span>
-        <span className="text-2xl text-blue-400 font-bold hover:underline cursor-pointer">
+        <span className="text-2xl text-blue-400 font-bold hover:underline cursor-pointer break-words">
           https://dynamoqr.vercel.app/
           {url?.custom_url ? url?.custom_url : url.static_url}
         </span>
-        <span className="flex items-center gap-1  hover:underline cursor-pointer">
+        <span className="flex items-center gap-1  hover:underline cursor-pointer break-all">
           {url?.dynamic_url}
         </span>
         <span className="flex items-end font-extralight text-sm flex-1 ">
