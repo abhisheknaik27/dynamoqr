@@ -21,8 +21,8 @@ const RedirectLink = () => {
   useEffect(() => {
     if (!loading && data) {
       fnStats();
-      window.location.href = data.dynamic_url;
-      console.log(data.dynamic_url);
+      // window.location.href = data.dynamic_url;
+      // console.log(data.dynamic_url);
     }
   }, [loading, data]);
 
