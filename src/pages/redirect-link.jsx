@@ -22,6 +22,7 @@ const RedirectLink = () => {
     if (!loading && data) {
       fnStats();
       window.location.href = data.dynamic_url;
+      console.log(data.dynamic_url);
     }
   }, [loading, data]);
 
