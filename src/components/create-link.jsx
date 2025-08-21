@@ -111,27 +111,27 @@ const CreateLink = () => {
       <DialogTrigger asChild>
         <Button variant="outline">Create New Link</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="w-full max-w-sm sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="font-bold gradient-title text-2xl">
+          <DialogTitle className="font-bold gradient-title text-2xl text-center sm:text-left">
             Create Dynamic QR
           </DialogTitle>
         </DialogHeader>
 
         {shortUrl && (
-          <div className="flex flex-col items-center gap-4 p-4 border rounded-lg bg-gray-50">
+          <div className="flex flex-col items-center gap-4 p-4 border rounded-lg bg-gray-50 overflow-x-auto">
             <QRCode value={staticQrUrl} size={200} ref={ref} />
             <a
               href={staticQrUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-blue-600 hover:underline"
+              className="font-semibold text-blue-600 break-all hover:underline text-center"
             >
               {staticQrUrl}
             </a>
             <p className="text-sm text-center text-gray-600">
-              This QR code is permanent. You can change URL it
-              points to at any time.
+              This QR code is permanent. You can change URL it points to at any
+              time.
             </p>
           </div>
         )}
@@ -142,6 +142,7 @@ const CreateLink = () => {
           placeholder="Title"
           value={formValues.title}
           onChange={handleChange}
+          className="w-full"
         />
         {errors.title && <Error message={errors.title} />}
 
@@ -151,11 +152,17 @@ const CreateLink = () => {
           placeholder="Enter URL (https://www.example.com)"
           value={formValues.dynamic_url}
           onChange={handleChange}
+          className="w-full break-all"
         />
         {errors.dynamic_url && <Error message={errors.dynamic_url} />}
 
-        <DialogFooter className="sm:justify-start">
-          <Button type="button" onClick={createNewUrl} disabled={loading}>
+        <DialogFooter className="sm:justify-start w-full">
+          <Button
+            type="button"
+            onClick={createNewUrl}
+            disabled={loading}
+            className="w-full sm:w-auto"
+          >
             {loading ? <BeatLoader size={10} color="white" /> : "Create Link"}
           </Button>
         </DialogFooter>
