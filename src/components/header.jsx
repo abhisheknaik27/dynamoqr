@@ -44,7 +44,7 @@ const Header = () => {
             <DropdownMenu>
               <DropdownMenuTrigger className="rounded-full overflow-hidden">
                 <Avatar>
-                  <AvatarFallback>"ME"</AvatarFallback>
+                  <AvatarFallback>ME</AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
