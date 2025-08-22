@@ -27,7 +27,6 @@ const SignUp = () => {
     name: "",
     email: "",
     password: "",
-    profile_pic: null,
   });
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
@@ -62,7 +61,7 @@ const SignUp = () => {
         password: Yup.string()
           .min(6, "Password must be atleast 6 characters")
           .required("Password is required"),
-        profile_pic: Yup.mixed(),
+        // profile_pic: Yup.mixed(),
       });
 
       await schema.validate(formData, { abortEarly: false });
@@ -93,7 +92,7 @@ const SignUp = () => {
           <div className="space-y-1">
             <Input
               name="name"
-              type="name"
+              type="text"
               placeholder="Enter Name"
               onChange={handleInputChange}
             />
@@ -117,7 +116,7 @@ const SignUp = () => {
             />
             {errors.password && <Error message={errors.password} />}
           </div>
-          <div className="space-y-1">
+          {/* <div className="space-y-1">
             <Input
               name="profile_pic"
               type="file"
@@ -125,7 +124,7 @@ const SignUp = () => {
               onChange={handleInputChange}
             />
             {errors.profile_pic && <Error message={errors.profile_pic} />}
-          </div>
+          </div> */}
         </CardContent>
         <CardFooter>
           <Button onClick={handleSignup}>

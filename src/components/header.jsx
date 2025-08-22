@@ -44,13 +44,14 @@ const Header = () => {
             <DropdownMenu>
               <DropdownMenuTrigger className="rounded-full overflow-hidden">
                 <Avatar>
-                  <AvatarImage
-                    className="object-contain"
-                    src={user?.user_metadata?.profile_pic}
-                  />
                   <AvatarFallback>
-                    {" "}
-                    {user?.user_metadata?.name?.split(" ")[0] || "ME"}
+                    {user?.user_metadata?.name
+                      ? user.user_metadata.name
+                          .split(" ")[0]
+                          .charAt(0)
+                          .toUpperCase() +
+                        user.user_metadata.name.split(" ")[0].slice(1)
+                      : "ME"}
                   </AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
