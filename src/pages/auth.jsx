@@ -19,11 +19,11 @@ const Auth = () => {
   }, [isAuthenticated, loading]);
 
   return (
-    <div className="mt-16 flex flex-col items-center gap-6">
-      <h1 className="gradient-title text-5xl font-extrabold">
+    <div className="mt-16 flex flex-col items-center gap-6 px-4">
+      <h1 className="gradient-title text-center text-3xl font-extrabold sm:text-5xl">
         {longLink ? "Let's Login First" : "Login / SignUp"}
       </h1>
-      <Tabs defaultValue="login" className="w-[400px]">
+      <Tabs defaultValue="login" className="w-full max-w-[400px]">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="login">Login</TabsTrigger>
           <TabsTrigger value="signup">SignUp</TabsTrigger>

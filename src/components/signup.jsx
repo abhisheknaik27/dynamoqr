@@ -127,7 +127,7 @@ const SignUp = () => {
           </div> */}
         </CardContent>
         <CardFooter>
-          <Button onClick={handleSignup}>
+          <Button onClick={handleSignup} className="w-full">
             {loading ? (
               <BeatLoader size={10} color="#2e5bf0" />
             ) : (

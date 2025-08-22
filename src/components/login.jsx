@@ -104,7 +104,7 @@ const Login = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button onClick={handleLogin}>
+          <Button onClick={handleLogin} className="w-full">
             {loading ? <BeatLoader size={10} color="#2e5bf0" /> : "Login"}
           </Button>
         </CardFooter>
