@@ -48,7 +48,10 @@ const Header = () => {
                     className="object-contain"
                     src={user?.user_metadata?.profile_pic}
                   />
-                  <AvatarFallback>USER</AvatarFallback>
+                  <AvatarFallback>
+                    {" "}
+                    {user?.user_metadata?.name?.split(" ")[0] || "ME"}
+                  </AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
