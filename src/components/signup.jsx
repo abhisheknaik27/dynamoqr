@@ -62,7 +62,7 @@ const SignUp = () => {
         password: Yup.string()
           .min(6, "Password must be atleast 6 characters")
           .required("Password is required"),
-        profile_pic: Yup.mixed().required("Profile Picture is required"),
+        profile_pic: Yup.mixed(),
       });
 
       await schema.validate(formData, { abortEarly: false });
